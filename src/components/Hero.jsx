@@ -54,13 +54,6 @@ export default function Hero() {
       </button>
 
       <div className="wrap hero__inner">
-        <p className="eyebrow eyebrow--light">{slide.eyebrow}</p>
-        <h1 className="hero__headline">
-          {slide.headline[0]}
-          <br />
-          {slide.headline[1]}
-        </h1>
-        <p className="hero__sub">{slide.sub}</p>
         <div className="hero__ctas">
           <Link to={slide.cta.to} className="btn btn--pale">
             {slide.cta.label}
@@ -133,23 +126,7 @@ export default function Hero() {
           position: relative;
           max-width: 720px;
         }
-        .hero__headline {
-          margin-top: 18px;
-          font-size: clamp(44px, 8vw, 88px);
-          font-weight: 200;
-          letter-spacing: -0.01em;
-          line-height: 1.02;
-        }
-        .hero__sub {
-          margin-top: 26px;
-          max-width: 440px;
-          font-size: 16px;
-          font-weight: 300;
-          line-height: 1.7;
-          color: rgba(255,255,255,0.88);
-        }
         .hero__ctas {
-          margin-top: 44px;
           display: flex;
           align-items: center;
           gap: 32px;
