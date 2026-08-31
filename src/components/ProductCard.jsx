@@ -1,19 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { formatPrice } from '../data/products.js'
-import { iconMap } from '../icons/Icons.jsx'
 
 export default function ProductCard({ product }) {
-  const Icon = iconMap[product.type]
-  const [from, to] = product.tile
-
   return (
     <Link to={`/product/${product.id}`} className="pcard">
-      <div
-        className="pcard__art shimmer"
-        style={{ background: `linear-gradient(150deg, ${from}, ${to})` }}
-      >
-        {Icon && <Icon color="rgba(255,255,255,0.92)" />}
+      <div className="pcard__art shimmer">
+        <img src={product.image} alt={product.name} loading="lazy" />
       </div>
       <div className="pcard__body">
         <p className="pcard__type">{product.type}</p>
@@ -28,12 +21,13 @@ export default function ProductCard({ product }) {
         .pcard__art {
           aspect-ratio: 1 / 1;
           border-radius: var(--radius);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          overflow: hidden;
+          background: var(--blush);
         }
-        .pcard__art svg {
-          width: 34%;
+        .pcard__art img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         .pcard__body {
           padding-top: 16px;

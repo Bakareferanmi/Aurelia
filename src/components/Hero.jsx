@@ -8,16 +8,14 @@ const slides = [
     headline: ['Worn close.', 'Noticed anyway.'],
     sub: 'Gold vermeil jewelry and precision wrist watches, designed in small batches and finished by hand.',
     cta: { label: 'Shop the collection', to: '/shop/all' },
-    from: '#ff2e93',
-    to: '#d8006b',
+    image: 'https://images.unsplash.com/photo-1656010280156-fa8c1793c235?auto=format&fit=crop&w=1600&q=70',
   },
   {
     eyebrow: 'New — The Meridian Collection',
     headline: ['Time, kept', 'close to you.'],
     sub: 'Sapphire crystal cases sized for every wrist, paired with dials that reward a second look.',
     cta: { label: 'Shop watches', to: '/shop/watches' },
-    from: '#241d1a',
-    to: '#0e0c0b',
+    image: 'https://images.unsplash.com/photo-1704428303280-84768603d539?auto=format&fit=crop&w=1600&q=70',
   },
 ]
 
@@ -37,10 +35,16 @@ export default function Hero() {
   const slide = slides[index]
 
   return (
-    <section
-      className="hero"
-      style={{ background: `linear-gradient(135deg, ${slide.from}, ${slide.to})` }}
-    >
+    <section className="hero">
+      {slides.map((s, i) => (
+        <div
+          key={i}
+          className={`hero__bg ${i === index ? 'is-active' : ''}`}
+          style={{ backgroundImage: `url(${s.image})` }}
+        />
+      ))}
+      <div className="hero__scrim" />
+
       <button
         className="hero__toggle"
         aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
@@ -84,34 +88,31 @@ export default function Hero() {
           color: var(--white);
           padding: 110px 0 72px;
           overflow: hidden;
-          transition: background 0.6s ease;
+          background: var(--ink);
         }
         @media (max-width: 560px) {
           .hero { padding: 72px 0 56px; }
         }
-        .hero::before {
-          content: '';
+        .hero__bg {
           position: absolute;
-          right: -12%;
-          top: -30%;
-          width: 520px;
-          height: 520px;
-          border-radius: 50%;
-          border: 1px solid rgba(255,255,255,0.25);
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 1s ease;
         }
-        .hero::after {
-          content: '';
+        .hero__bg.is-active {
+          opacity: 1;
+        }
+        .hero__scrim {
           position: absolute;
-          right: 6%;
-          bottom: -22%;
-          width: 320px;
-          height: 320px;
-          border-radius: 50%;
-          border: 1px solid rgba(255,255,255,0.18);
-        }
-        @media (max-width: 560px) {
-          .hero::before { width: 220px; height: 220px; right: -60px; top: -60px; }
-          .hero::after { width: 140px; height: 140px; right: 20px; bottom: -40px; }
+          inset: 0;
+          background: linear-gradient(
+            120deg,
+            rgba(20,16,15,0.78) 0%,
+            rgba(20,16,15,0.5) 45%,
+            rgba(20,16,15,0.35) 100%
+          );
         }
         .hero__toggle {
           position: absolute;
@@ -122,7 +123,7 @@ export default function Hero() {
           height: 34px;
           border-radius: 50%;
           border: 1px solid rgba(255,255,255,0.4);
-          background: rgba(0,0,0,0.15);
+          background: rgba(0,0,0,0.25);
           color: var(--white);
           display: flex;
           align-items: center;

@@ -1,27 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Gem, Sparkles, Droplet, Circle, Watch } from 'lucide-react'
 
 const categories = [
-  { label: 'Rings', type: 'ring', category: 'jewelry', icon: Gem, from: '#ff4fa3', to: '#d8006b' },
-  { label: 'Necklaces', type: 'necklace', category: 'jewelry', icon: Sparkles, from: '#f3d4e6', to: '#ff1587' },
-  { label: 'Earrings', type: 'earring', category: 'jewelry', icon: Droplet, from: '#ffd7ea', to: '#c7a25c' },
-  { label: 'Bracelets', type: 'bracelet', category: 'jewelry', icon: Circle, from: '#ffb8dc', to: '#ff1587' },
-  { label: 'Watches', type: 'watch', category: 'watches', icon: Watch, from: '#241d1a', to: '#0e0c0b' },
+  {
+    label: 'Rings',
+    type: 'ring',
+    category: 'jewelry',
+    image: 'https://images.unsplash.com/photo-1656010280156-fa8c1793c235?auto=format&fit=crop&w=500&q=65',
+  },
+  {
+    label: 'Necklaces',
+    type: 'necklace',
+    category: 'jewelry',
+    image: 'https://images.unsplash.com/photo-1654699991520-aaaf4dd2608b?auto=format&fit=crop&w=500&q=65',
+  },
+  {
+    label: 'Earrings',
+    type: 'earring',
+    category: 'jewelry',
+    image: 'https://images.unsplash.com/photo-1596107034181-9f168717f1ee?auto=format&fit=crop&w=500&q=65',
+  },
+  {
+    label: 'Bracelets',
+    type: 'bracelet',
+    category: 'jewelry',
+    image: 'https://images.unsplash.com/photo-1655255114527-d0a834d9a774?auto=format&fit=crop&w=500&q=65',
+  },
+  {
+    label: 'Watches',
+    type: 'watch',
+    category: 'watches',
+    image: 'https://images.unsplash.com/photo-1704428303280-84768603d539?auto=format&fit=crop&w=500&q=65',
+  },
 ]
 
 export default function CategoryGrid() {
   return (
     <div className="catgrid">
-      {categories.map(({ label, type, category, icon: Icon, from, to }) => (
-        <Link
-          key={type}
-          to={`/shop/${category}?type=${type}`}
-          className="catgrid__tile"
-          style={{ background: `linear-gradient(150deg, ${from}, ${to})` }}
-        >
-          <Icon size={30} strokeWidth={1.25} color="rgba(255,255,255,0.9)" />
-          <span>{label}</span>
+      {categories.map(({ label, type, category, image }) => (
+        <Link key={type} to={`/shop/${category}?type=${type}`} className="catgrid__tile">
+          <img src={image} alt={label} loading="lazy" />
+          <span className="catgrid__overlay" />
+          <span className="catgrid__label">{label}</span>
         </Link>
       ))}
 
@@ -32,16 +52,34 @@ export default function CategoryGrid() {
           gap: 20px;
         }
         .catgrid__tile {
+          position: relative;
           aspect-ratio: 1 / 1;
           border-radius: var(--radius);
+          overflow: hidden;
           display: flex;
-          flex-direction: column;
-          align-items: center;
+          align-items: flex-end;
           justify-content: center;
-          gap: 14px;
-          color: var(--white);
+          padding-bottom: 16px;
         }
-        .catgrid__tile span {
+        .catgrid__tile img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        .catgrid__tile:hover img {
+          transform: scale(1.06);
+        }
+        .catgrid__overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(20,16,15,0.72), rgba(20,16,15,0.05) 55%);
+        }
+        .catgrid__label {
+          position: relative;
+          color: var(--white);
           font-size: 12px;
           font-weight: 500;
           letter-spacing: 0.1em;

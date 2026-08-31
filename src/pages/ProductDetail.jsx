@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { getProduct, formatPrice } from '../data/products.js'
-import { iconMap } from '../icons/Icons.jsx'
 import { useCart } from '../context/CartContext.jsx'
 
 export default function ProductDetail() {
@@ -11,9 +10,6 @@ export default function ProductDetail() {
   const [added, setAdded] = useState(false)
 
   if (!product) return <Navigate to="/shop/all" replace />
-
-  const Icon = iconMap[product.type]
-  const [from, to] = product.tile
 
   function handleAdd() {
     addToCart(product)
@@ -28,11 +24,8 @@ export default function ProductDetail() {
       </Link>
 
       <div className="detail__grid">
-        <div
-          className="detail__art shimmer"
-          style={{ background: `linear-gradient(150deg, ${from}, ${to})` }}
-        >
-          {Icon && <Icon color="rgba(255,255,255,0.92)" />}
+        <div className="detail__art shimmer">
+          <img src={product.image} alt={product.name} />
         </div>
 
         <div className="detail__info">
@@ -59,7 +52,7 @@ export default function ProductDetail() {
 
       <style>{`
         .detail {
-          padding: 48px 0 120px;
+          padding: 40px 0 var(--section-y);
         }
         .detail__back {
           font-size: 13px;
@@ -74,16 +67,17 @@ export default function ProductDetail() {
         .detail__art {
           aspect-ratio: 1 / 1;
           border-radius: var(--radius);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          overflow: hidden;
+          background: var(--blush);
         }
-        .detail__art svg {
-          width: 32%;
+        .detail__art img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         .detail__info h1 {
           margin-top: 10px;
-          font-size: 38px;
+          font-size: clamp(28px, 6vw, 38px);
           font-weight: 300;
         }
         .detail__price {
@@ -128,7 +122,8 @@ export default function ProductDetail() {
           background: var(--champagne);
         }
         @media (max-width: 760px) {
-          .detail__grid { grid-template-columns: 1fr; gap: 32px; }
+          .detail__grid { grid-template-columns: 1fr; gap: 28px; }
+          .detail__art { max-width: 360px; margin: 0 auto; }
         }
       `}</style>
     </div>
