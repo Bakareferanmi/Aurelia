@@ -110,16 +110,17 @@ export default function Cart() {
           border-radius: var(--radius);
           overflow: hidden;
           background: var(--blush);
+          border: 1px solid var(--stroke);
         }
         .cart__thumb img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        .cart__row-name { font-size: 16px; }
-        .cart__row-price { margin-top: 4px; color: var(--graphite); font-size: 14px; }
+        .cart__row-name { font-size: 16px; line-height: 1.4; }
+        .cart__row-price { margin-top: 6px; color: var(--ink); font-weight: 500; font-size: 14px; }
         .cart__qty {
-          margin-top: 10px;
+          margin-top: 12px;
           display: inline-flex;
           align-items: center;
           gap: 14px;
@@ -148,7 +149,7 @@ export default function Cart() {
           width: 34px;
           height: 34px;
           background: none;
-          border: 1px solid transparent;
+          border: 1px solid var(--stroke);
           border-radius: var(--radius);
           color: var(--pink-deep);
           align-self: start;
@@ -159,6 +160,7 @@ export default function Cart() {
         }
         .cart__summary {
           background: var(--blush);
+          border: 1px solid var(--stroke);
           border-radius: var(--radius);
           padding: 32px;
           height: fit-content;
@@ -168,14 +170,14 @@ export default function Cart() {
           letter-spacing: 0.14em;
           text-transform: uppercase;
           color: var(--champagne);
-          margin: 0 0 20px;
+          margin: 0 0 22px;
         }
         .cart__summary-row {
           display: flex;
           justify-content: space-between;
           font-size: 14px;
           color: var(--graphite);
-          margin-bottom: 12px;
+          margin-bottom: 14px;
         }
         .cart__summary-total {
           color: var(--ink);

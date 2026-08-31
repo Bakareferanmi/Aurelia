@@ -23,6 +23,7 @@ export default function ProductCard({ product }) {
           border-radius: var(--radius);
           overflow: hidden;
           background: var(--blush);
+          border: 1px solid var(--stroke);
         }
         .pcard__art img {
           width: 100%;
@@ -30,7 +31,7 @@ export default function ProductCard({ product }) {
           object-fit: cover;
         }
         .pcard__body {
-          padding-top: 16px;
+          padding-top: 18px;
         }
         .pcard__type {
           margin: 0;
@@ -40,15 +41,17 @@ export default function ProductCard({ product }) {
           color: var(--champagne);
         }
         .pcard__name {
-          margin-top: 6px;
+          margin-top: 8px;
           font-size: 17px;
           font-weight: 400;
+          line-height: 1.35;
           color: var(--ink);
         }
         .pcard__price {
-          margin-top: 6px;
+          margin-top: 8px;
           font-size: 14px;
-          color: var(--graphite);
+          font-weight: 500;
+          color: var(--ink);
         }
       `}</style>
     </Link>

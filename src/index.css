@@ -6,7 +6,8 @@
   --blush: #f5e3ec;
   --champagne: #c7a25c;
   --champagne-soft: #e9dcc0;
-  --graphite: #6b6560;
+  --graphite: #524d49;
+  --stroke: rgba(20, 16, 15, 0.14);
   --white: #ffffff;
 
   --font: "Poppins", sans-serif;
@@ -102,7 +103,7 @@ h1, h2, h3, h4 {
   gap: 10px;
   padding: 15px 30px;
   border-radius: var(--radius);
-  border: 1px solid var(--ink);
+  border: 1.5px solid var(--ink);
   background: transparent;
   font-size: 13px;
   font-weight: 500;
@@ -119,7 +120,7 @@ h1, h2, h3, h4 {
 
 .btn--solid {
   background: var(--pink);
-  border-color: var(--pink);
+  border: 1.5px solid var(--pink-deep);
   color: var(--white);
 }
 
@@ -130,7 +131,7 @@ h1, h2, h3, h4 {
 }
 
 .btn--pale {
-  border-color: rgba(255,255,255,0.5);
+  border: 1.5px solid rgba(255,255,255,0.7);
   color: var(--white);
 }
 

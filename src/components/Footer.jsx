@@ -189,7 +189,7 @@ export default function Footer() {
           width: 44px;
           flex-shrink: 0;
           background: var(--pink);
-          border: none;
+          border: 1.5px solid var(--pink-deep);
           border-radius: var(--radius);
           color: #fff;
           display: flex;

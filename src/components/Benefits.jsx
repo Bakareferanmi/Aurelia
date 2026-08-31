@@ -26,8 +26,8 @@ export default function Benefits() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1px;
-          background: rgba(20,16,15,0.08);
-          border: 1px solid rgba(20,16,15,0.08);
+          background: var(--stroke);
+          border: 1px solid var(--stroke);
           border-radius: var(--radius);
           overflow: hidden;
         }
@@ -38,7 +38,7 @@ export default function Benefits() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 8px;
+          gap: 10px;
         }
         .benefits__label {
           font-size: 13px;
@@ -48,6 +48,7 @@ export default function Benefits() {
         }
         .benefits__sub {
           font-size: 12px;
+          line-height: 1.5;
           color: var(--graphite);
         }
         @media (max-width: 640px) {

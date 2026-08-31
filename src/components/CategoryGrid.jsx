@@ -60,6 +60,7 @@ export default function CategoryGrid() {
           align-items: flex-end;
           justify-content: center;
           padding-bottom: 16px;
+          border: 1px solid var(--stroke);
         }
         .catgrid__tile img {
           position: absolute;

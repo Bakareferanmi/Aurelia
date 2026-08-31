@@ -69,6 +69,7 @@ export default function ProductDetail() {
           border-radius: var(--radius);
           overflow: hidden;
           background: var(--blush);
+          border: 1px solid var(--stroke);
         }
         .detail__art img {
           width: 100%;
@@ -76,23 +77,26 @@ export default function ProductDetail() {
           object-fit: cover;
         }
         .detail__info h1 {
-          margin-top: 10px;
+          margin-top: 12px;
           font-size: clamp(28px, 6vw, 38px);
           font-weight: 300;
+          line-height: 1.15;
         }
         .detail__price {
-          margin-top: 12px;
+          margin-top: 14px;
           font-size: 20px;
+          font-weight: 500;
           color: var(--pink-deep);
         }
         .detail__desc {
           font-size: 15px;
-          line-height: 1.8;
+          line-height: 1.85;
           color: var(--ink);
         }
         .detail__material {
-          margin-top: 18px;
+          margin-top: 20px;
           font-size: 14px;
+          line-height: 1.6;
           color: var(--graphite);
         }
         .detail__cta {
