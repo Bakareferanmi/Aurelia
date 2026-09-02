@@ -1,0 +1,171 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Play, Pause } from 'lucide-react'
+
+const slides = [
+  {
+    eyebrow: 'Fine Jewelry & Timepieces',
+    headline: ['Worn close.', 'Noticed anyway.'],
+    sub: 'Gold vermeil jewelry and precision wrist watches, designed in small batches and finished by hand.',
+    cta: { label: 'Shop the collection', to: '/shop/all' },
+    image: 'https://images.unsplash.com/photo-1656010280156-fa8c1793c235?auto=format&fit=crop&w=1600&q=70',
+  },
+  {
+    eyebrow: 'New — The Meridian Collection',
+    headline: ['Time, kept', 'close to you.'],
+    sub: 'Sapphire crystal cases sized for every wrist, paired with dials that reward a second look.',
+    cta: { label: 'Shop watches', to: '/shop/watches' },
+    image: 'https://images.unsplash.com/photo-1704428303280-84768603d539?auto=format&fit=crop&w=1600&q=70',
+  },
+]
+
+export default function Hero() {
+  const [index, setIndex] = useState(0)
+  const [playing, setPlaying] = useState(true)
+  const timerRef = useRef(null)
+
+  useEffect(() => {
+    if (!playing) return
+    timerRef.current = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length)
+    }, 6000)
+    return () => clearInterval(timerRef.current)
+  }, [playing])
+
+  const slide = slides[index]
+
+  return (
+    <section className="hero">
+      {slides.map((s, i) => (
+        <div
+          key={i}
+          className={`hero__bg ${i === index ? 'is-active' : ''}`}
+          style={{ backgroundImage: `url(${s.image})` }}
+        />
+      ))}
+      <div className="hero__scrim" />
+
+      <button
+        className="hero__toggle"
+        aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
+        onClick={() => setPlaying((p) => !p)}
+      >
+        {playing ? <Pause size={15} strokeWidth={1.5} /> : <Play size={15} strokeWidth={1.5} />}
+      </button>
+
+      <div className="wrap hero__inner">
+        <div className="hero__ctas">
+          <Link to={slide.cta.to} className="btn btn--pale">
+            {slide.cta.label}
+          </Link>
+          <Link to="/shop/all" className="btn__text">
+            View all pieces →
+          </Link>
+        </div>
+      </div>
+
+      <div className="hero__dots">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            className={`hero__dot ${i === index ? 'is-active' : ''}`}
+            aria-label={`Show slide ${i + 1}`}
+            onClick={() => setIndex(i)}
+          />
+        ))}
+      </div>
+
+      <style>{`
+        .hero {
+          position: relative;
+          color: var(--white);
+          overflow: hidden;
+          background: var(--ink);
+          min-height: 640px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 110px 0 72px;
+        }
+        @media (max-width: 560px) {
+          .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 72px 0 56px;
+          }
+        }
+        .hero__bg {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 1s ease;
+        }
+        .hero__bg.is-active {
+          opacity: 1;
+        }
+        .hero__scrim {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            120deg,
+            rgba(20,16,15,0.78) 0%,
+            rgba(20,16,15,0.5) 45%,
+            rgba(20,16,15,0.35) 100%
+          );
+        }
+        .hero__toggle {
+          position: absolute;
+          top: 24px;
+          right: 24px;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          border: 1px solid rgba(255,255,255,0.4);
+          background: rgba(0,0,0,0.25);
+          color: var(--white);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero__inner {
+          position: relative;
+          max-width: 720px;
+        }
+        .hero__ctas {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+          flex-wrap: wrap;
+        }
+        .btn__text {
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(255,255,255,0.6);
+          padding-bottom: 3px;
+        }
+        .hero__dots {
+          position: relative;
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+          margin-top: 48px;
+        }
+        .hero__dot {
+          width: 22px;
+          height: 2px;
+          background: rgba(255,255,255,0.35);
+          border: none;
+          transition: background 0.3s ease;
+        }
+        .hero__dot.is-active {
+          background: var(--white);
+        }
+      `}</style>
+    </section>
+  )
+}
